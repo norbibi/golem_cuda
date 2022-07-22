@@ -1,0 +1,15 @@
+[Unit]
+Description=Golem requestor
+After=network.target
+
+[Service]
+User=SED_USER
+Group=SED_USER
+Environment=PATH=/home/SED_USER/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+Restart=on-failure
+WorkingDirectory=/home/SED_USER
+ExecStart=/home/SED_USER/.local/bin/yagna service run
+ExecStartPost=/bin/bash -c 'sleep 5 && /home/SED_USER/.local/bin/yagna payment init --sender'
+
+[Install]
+WantedBy=default.target

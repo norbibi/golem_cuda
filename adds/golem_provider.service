@@ -1,0 +1,44 @@
+[Unit]
+Description=Golem provider
+After=network.target
+
+[Service]
+User=golem
+Group=golem
+Environment=PATH=/home/golem/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+Restart=on-failure
+WorkingDirectory=/home/golem
+
+ExecStart=/home/golem/.local/bin/golemsp run --payment-network SED_PAYMENT_NETWORK --subnet SED_SUBNET 
+
+Environment=GPU_PCI=SED_GPU_PCI
+Environment=INTERNET_OUTBOUND=SED_INTERNET_OUTBOUND
+Environment=IB_PCI=SED_IB_PCI
+Environment=IB_CLUSTER_ID=SED_IB_CLUSTER_ID
+
+LimitMEMLOCK=infinity
+
+# Increase Systemd Service Security Score
+
+LockPersonality=true
+NoNewPrivileges=true
+PrivateUsers=true
+ProtectControlGroups=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+RemoveIPC=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_PACKET AF_UNIX
+SystemCallArchitectures=native
+SystemCallFilter=~@clock @debug @module @mount @raw-io @reboot @obsolete
+
+#problem with mkdir ... @privileged
+
+CapabilityBoundingSet=~CAP_SYS_ADMIN CAP_SYS_PTRACE CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_NET_ADMIN CAP_CHOWN CAP_FSETID CAP_SETFCAP CAP_FOWNER CAP_IPC_OWNER CAP_DAC_OVERRIDE CAP_DAC_READ_SEARCH CAP_KILL CAP_SYS_BOOT
+
+[Install]
+WantedBy=default.target
