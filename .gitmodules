@@ -1,0 +1,9 @@
+[submodule "ya-runtime-vm"]
+	path = ya-runtime-vm
+	url = https://github.com/norbibi/ya-runtime-vm.git
+[submodule "buildroot"]
+	path = buildroot
+	url = https://github.com/norbibi/buildroot.git
+[submodule "yapapi"]
+	path = yapapi
+	url = https://github.com/norbibi/yapapi.git
