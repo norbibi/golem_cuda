@@ -49,7 +49,7 @@ Example of provider's advertisement used by requestor:
 >Requestor is the same as the official, this installer just adds a few steps to request tGLM, create systemd service and put app_key in appkey_env.sh file for easy export. 
 >  
 >Requirements:
->- packages: jq python3 python3-pip git  
+>- packages: jq python3 python3-pip git git-lfs  
 >- python module(s): yapapi  
 >```  
 >git clone https://github.com/norbibi/golem_cuda.git  
@@ -161,6 +161,7 @@ Golem Network is a great project which deserves to succeed.
   
 Norbert Mauger  
 norbert.mauger.private+golem@gmail.com  
+https://www.linkedin.com/in/norbert-mauger  
 
 **Donations:**  
 - Bitcoin &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;bc1qxll9609n34zqelee99ye0ww4ykmh7g92rw2cpf  
