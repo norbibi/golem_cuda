@@ -49,7 +49,7 @@ Example of provider's advertisement used by requestor:
 >Requestor is the same as the official, this installer just adds a few steps to request tGLM, create systemd service and put app_key in appkey_env.sh file for easy export. 
 >  
 >Requirements:
->- packages: jq python3 python3-pip git git-lfs  
+>- packages: jq python3 python3-pip git  
 >- python module(s): yapapi  
 >```  
 >git clone https://github.com/norbibi/golem_cuda.git  
