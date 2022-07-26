@@ -33,7 +33,7 @@ Example of provider's advertisement used by requestor:
 >- packages: git pciutils  
 >```
 >git clone https://github.com/norbibi/golem_cuda.git  
->cd golem_cuda  
+>cd golem_cuda && git submodule update --init --recursive 
 >./golem_cuda.sh -i provider  
 >```  
 >  
@@ -53,7 +53,7 @@ Example of provider's advertisement used by requestor:
 >- python module(s): yapapi  
 >```  
 >git clone https://github.com/norbibi/golem_cuda.git  
->cd golem_cuda  
+>cd golem_cuda && git submodule update --init --recursive  
 >./golem_cuda.sh -i requestor  
 >```  
 
