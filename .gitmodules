@@ -1,9 +1,12 @@
 [submodule "ya-runtime-vm"]
 	path = ya-runtime-vm
 	url = https://github.com/norbibi/ya-runtime-vm.git
+	branch = v0.2.11_golem_cuda
 [submodule "buildroot"]
 	path = buildroot
 	url = https://github.com/norbibi/buildroot.git
+	branch = 2022.02.3_golem_cuda
 [submodule "yapapi"]
 	path = yapapi
 	url = https://github.com/norbibi/yapapi.git
+	branch = 0.9.2_golem_cuda
