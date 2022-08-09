@@ -4,12 +4,12 @@ dir=$(dirname "$(realpath "$0")")
 
 runtime=$dir/ya-runtime-vm/target/release/ya-runtime-vm
 vmrt=$dir/ya-runtime-vm/qemu/vmrt
-vmlinuz=$dir/buildroot/output/images/bzImage
+vmlinuz=$dir/docker_golem_cuda_base/vmlinuz-virt
 initramfs=$dir/ya-runtime-vm/runtime/init-container/initramfs.cpio.gz
 
 save_runtime=$dir/binaries/ya-runtime-vm
 save_vmrt=$dir/binaries/vmrt
-save_vmlinuz=$dir/binaries/bzImage
+save_vmlinuz=$dir/binaries/vmlinuz-virt
 save_initramfs=$dir/binaries/initramfs.cpio.gz
 
 enable_modules()
@@ -128,13 +128,10 @@ build_vmrt()
 	cp -f $vmrt $save_vmrt
 }
 
-build_kernel()
+build_kernel_and_docker_golem_cuda_base()
 {
-	cores=$(($(nproc --all)-1))
-	cd $dir/buildroot
-	make clean
-	make qemu_x86_64_golem_defconfig
-	make -j $cores
+	cd $dir/docker_golem_cuda_base
+	make clean && make
 	cp -f $vmlinuz $save_vmlinuz
 }
 
@@ -142,7 +139,7 @@ build_provider_overlay()
 {
 	build_runtime
 	build_vmrt
-	build_kernel
+	build_kernel_and_docker_golem_cuda_base
 }
 
 install_runtime()
@@ -289,7 +286,6 @@ restore_binaries()
 	mkdir -p $dir/ya-runtime-vm/target/release
 	mkdir -p $dir/ya-runtime-vm/qemu
 	mkdir -p $dir/ya-runtime-vm/runtime/init-container
-	mkdir -p $dir/buildroot/output/images
 	cp -f $save_runtime $runtime
 	cp -f $save_initramfs $initramfs
 	cp -f $save_vmrt $vmrt
