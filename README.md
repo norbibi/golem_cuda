@@ -1,4 +1,4 @@
-# Golem Network - Yagna CUDA
+# Golem Network - Yagna CUDA v2
   
 The purpose of this repo is to bring CUDA support to the Yagna VM runtime.
   
@@ -8,16 +8,16 @@ Kernel ACS patch can be used if ACS isn't available in BIOS.
 
 Other features included:  
 - **Infiniband cluster**  
-The idea is to provide local infiniband cluster to Golem Network.  
+The idea is to provide local Infiniband cluster to Golem Network.  
 As with the GPU, this feature requires a dedicated Infiniband card for each provider in the cluster.
 - **Internet_outbound**  
 Some apps may need to download data from Internet, so this has been added pending official implementation.  
 
 All features are managed by environment variables:
-- GPU_PCI, if present and different of 'None', is the pci_bus_id of the gpu dedicated to the vm.
-- IB_PCI, if present and different of 'None', is the pci_bus_id of the infiniband card dedicated to the vm.
-- IB_CLUSTER_ID, if IB_PCI set, is a private id shared between cluster providers, a hash is used to advertise capability.
-- INTERNET_OUTBOUND allow to enable/disable outbound Internet access through Qemu's NAT (slirp). 
+- 'GPU_PCI', if present and different of 'None', is the pci_bus_id of the gpu dedicated to the vm.
+- 'IB_PCI', if present and different of 'None', is the pci_bus_id of the Infiniband card dedicated to the vm.
+- 'IB_CLUSTER_ID', if 'IB_PCI' set, is a private id shared between cluster providers, a hash is used to advertise capability.
+- 'INTERNET_OUTBOUND' allow to enable/disable outbound Internet access through Qemu's NAT (slirp). 
 
 ya-runtime-vm check the availibility of devices before advertise them. 
 
@@ -27,13 +27,13 @@ Example of provider's advertisement used by requestor:
 
 **Provider installation**  
 >  
->Installer will ask you for the PID_VID and PCI_BUS_ID of the devices you want to dedicate to the VM in order to upgrade kernel settings in grub and environment variables in the service file. 
+>Installer will ask you for the 'PID_VID' and 'PCI_BUS_ID' of the devices you want to dedicate to the VM in order to upgrade kernel settings in grub and environment variables in the service file. 
 >
 >Requirements:
 >- packages: git pciutils  
 >```
 >git clone https://github.com/norbibi/golem_cuda.git  
->cd golem_cuda && git submodule update --init --recursive 
+>cd golem_cuda 
 >./golem_cuda.sh -i provider  
 >```  
 >  
@@ -53,7 +53,7 @@ Example of provider's advertisement used by requestor:
 >- python module(s): yapapi  
 >```  
 >git clone https://github.com/norbibi/golem_cuda.git  
->cd golem_cuda && git submodule update --init --recursive  
+>cd golem_cuda  
 >./golem_cuda.sh -i requestor  
 >```  
 
@@ -70,91 +70,85 @@ Example of provider's advertisement used by requestor:
 >```
 >	source ./appkey_env.sh
 >```
->>**ssh_cuda**
+>>**cuda_ssh**
 >>
 >> Same as official ssh app provided by Golem with Cuda support.  
 >> Don't forget to put websocat (included in adds folder) in your PATH.  
 >>```
->>cd yapapi/examples/ssh_cuda
->>./ssh_cuda.py --subnet-tag devnet-beta
+>>cd yapapi/examples/cuda_ssh
+>>./cuda_ssh.py --subnet-tag devnet-beta
 >>```
 >>![ssh_cuda](screenshots/ssh_cuda_1.png)
 >>![ssh_cuda](screenshots/ssh_cuda_2.png)
 >
->>**yacat_cuda**
+>>**cuda_yacat**
 >>
 >> Same as official yacat app provided by Golem with Cuda support.
 >>```
->>cd yapapi/examples/yacat_cuda
->>./yacat_cuda.py --subnet-tag devnet-beta --mask '?a?a?a?a?a?a?a?a' --hash-type 0 --hash '5f4dcc3b5aa765d61d8327deb882cf99' --max-workers 1 --chunk-size 100000
+>>cd yapapi/examples/cuda_yacat
+>>./cuda_yacat.py --subnet-tag devnet-beta --mask '?a?a?a?a?a?a?a?a' --hash-type 0 --hash '5f4dcc3b5aa765d61d8327deb882cf99' --max-workers 1 --chunk-size 100000
 >>```
 >>![yacat_cuda](screenshots/yacat_cuda.png)
 >
->>**blender_cuda**
+>>**cuda_blender**
 >>  
 >> Same as official blender app provided by Golem with Cuda support.
 >>```
->>cd yapapi/examples/blender_cuda  
->>./blender_cuda.py --subnet-tag devnet-beta --scene Blender_3.blend
+>>cd yapapi/examples/cuda_blender  
+>>./cuda_blender.py --subnet-tag devnet-beta --scene Blender_3.blend
 >>```  
 >>![blender](screenshots/blender_cuda.png)
 >
->>**pytorch_cuda**
+>>**cuda_pytorch**
 >>  
 >> Pytorch Lightning with Cuda and Infiniband DDP support.  
 >>```
->>cd yapapi/examples/pytorch_cuda  
->>./pytorch_cuda.py --nodes 2 --gpus 1 --subnet-tag devnet-beta --batchsize 55000 --numworkers 4 --epochs 100 --app dist_train.py  
+>>cd yapapi/examples/cuda_pytorch  
+>>./cuda_pytorch.py --nodes 2 --gpus 1 --subnet-tag devnet-beta --batchsize 55000 --numworkers 4 --epochs 100 --app dist_train.py  
 >>```  
 >>![pytorch_cuda](screenshots/pytorch_cuda_1.png)
 >>![pytorch_cuda](screenshots/pytorch_cuda_2.png)
 >>![pytorch_cuda](screenshots/pytorch_cuda_3.png)
 >
->>**ffmpeg_cuda**
+>>**cuda_ffmpeg**
 >>  
 >> FFMPEG H264 to H265 converter with Cuda support.
 >>```
->>cd yapapi/examples/ffmpeg_cuda  
->>./ffmpeg_cuda.py --subnet-tag devnet-beta --file video.mp4
+>>cd yapapi/examples/cuda_ffmpeg  
+>>./cuda_ffmpeg.py --subnet-tag devnet-beta --file video.mp4
 >>```  
 >>![ffmpeg_cuda](screenshots/ffmpeg_cuda_1.png)
 >>![ffmpeg_cuda](screenshots/ffmpeg_cuda_2.png)
 
 **Builds**  
 >  
->There are two types of build, provider overlay and application image.  
->Buildroot is used to build provider kernel overlay and application base image.
->  
 >Global requirements:
->- package(s): musl musl-tools sed make binutils build-essential gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc libssl-dev  
+>- Docker
 >  
 >>**Build provider overlay**
 >>
 >>Requirements: 
 >>- Rust  
+>>- package(s): musl musl-tools
 >>
 >>```
+>>git submodule update --init --recursive
 >>./golem_cuda.sh -b
 >>```
 >>Provider overlay is composed of ya-runtime-vm, vmrt, vmlinuz-virt and initramfs.cpio.gz components.  
->>After build, binaries are saved in binaries folder.
+>>The base docker image is generated at the same time as the kernel.  
+>>After build, binaries are saved in binaries folder.  
 >
->>**Build cuda app image** (ffmpeg_cuda for example)
+>>**Build cuda app image** (cuda_ffmpeg for example)
 >>
->>Requirements:  
->>- Docker (host kernel > 5.10.29)  
->>- package(s): unsquashfs  
+>>Requirements:    
 >>- python module(s): gvmkit-build  
 >>
 >>```
->>cd yapapi/examples/ffmpeg_cuda  
->>./build_docker_golem_ffmpeg_cuda.sh
+>>cd yapapi/examples/cuda_ffmpeg  
+>>./build_cuda_ffmpeg.sh
 >>```
->>The script build base image with Buildroot, the generated filesystem is converted into docker image and then customized with the dockerfile.
->>After that, the script converts the final docker image to gvmi, uploads it in Golem repository and updates image hash in the application file.
-
-**How to create new Cuda app**  
-> From template application in yapapi/examples/template_cuda.  
+>>The script build the application docker image, converts it to gvmi, uploads it in Golem repository and updates image hash in the application file.
 
 Thanks you to the Golem team & community as well as my brother Cedric Nerger.  
 Golem Network is a great project which deserves to succeed.  
