@@ -1,6 +1,6 @@
 #!/bin/sh
 
-build_docker_image()
+build_image()
 {
 	docker rmi $1:latest
 	docker build --no-cache -t $1 $1
