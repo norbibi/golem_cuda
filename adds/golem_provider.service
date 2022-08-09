@@ -6,10 +6,9 @@ After=network.target
 User=golem
 Group=golem
 Environment=PATH=/home/golem/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
-Restart=on-failure
 WorkingDirectory=/home/golem
 
-ExecStart=/home/golem/.local/bin/golemsp run --payment-network SED_PAYMENT_NETWORK --subnet SED_SUBNET 
+ExecStart=/home/golem/.local/bin/golemsp run --payment-network SED_PAYMENT_NETWORK --subnet SED_SUBNET
 
 Environment=GPU_PCI=SED_GPU_PCI
 Environment=INTERNET_OUTBOUND=SED_INTERNET_OUTBOUND
