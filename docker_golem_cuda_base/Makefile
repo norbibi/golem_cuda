@@ -1,8 +1,7 @@
 all: vmlinuz-virt
 
 vmlinuz-virt: Dockerfile
-	docker build -t docker_golem_cuda_base .
-	docker tag docker_golem_cuda_base:latest maugnorbert/docker_golem_cuda_base:latest
+	docker build -t maugnorbert/docker_golem_cuda_base .
 	$(SHELL) copy_img maugnorbert/docker_golem_cuda_base /boot/vmlinuz-5.10.29 ./vmlinuz-virt
 
 clean:
