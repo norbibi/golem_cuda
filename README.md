@@ -32,7 +32,7 @@ Example of provider's advertisement used by requestor:
 >Requirements:
 >- packages: git pciutils  
 >```
->git clone https://github.com/norbibi/golem_cuda.git  
+>git clone --recurse-submodules https://github.com/norbibi/golem_cuda.git  
 >cd golem_cuda 
 >./golem_cuda.sh -i provider  
 >```  
@@ -52,7 +52,7 @@ Example of provider's advertisement used by requestor:
 >- packages: jq python3 python3-pip git  
 >- python module(s): yapapi  
 >```  
->git clone https://github.com/norbibi/golem_cuda.git  
+>git clone --recurse-submodules https://github.com/norbibi/golem_cuda.git  
 >cd golem_cuda  
 >./golem_cuda.sh -i requestor  
 >```  
