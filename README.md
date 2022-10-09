@@ -4,7 +4,7 @@ The purpose of this repo is to bring CUDA support to the Yagna VM runtime.
   
 Providers require 2 GPUs, one for host and second for Yagna VM (GPU passthrough).  
 Virtualisation, IOMMU and ACS must be enable in BIOS.  
-Kernel ACS patch can be used if ACS isn't available in BIOS.
+Kernel ACS patch can be used if ACS isn't available in BIOS (https://queuecumber.gitlab.io/linux-acs-override/)
 
 Other features included:  
 - **Infiniband cluster**  
