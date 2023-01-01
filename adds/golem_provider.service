@@ -3,17 +3,14 @@ Description=Golem provider
 After=network.target
 
 [Service]
-User=golem
-Group=golem
-Environment=PATH=/home/golem/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
-WorkingDirectory=/home/golem
+User=SED_USER
+Group=SED_USER
+Environment=PATH=/home/SED_USER/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+WorkingDirectory=/home/SED_USER
 
-ExecStart=/home/golem/.local/bin/golemsp run --payment-network SED_PAYMENT_NETWORK --subnet SED_SUBNET
+ExecStart=/home/SED_USER/.local/bin/golemsp run --payment-network mainnet --subnet public
 
 Environment=GPU_PCI=SED_GPU_PCI
-Environment=INTERNET_OUTBOUND=SED_INTERNET_OUTBOUND
-Environment=IB_PCI=SED_IB_PCI
-Environment=IB_CLUSTER_ID=SED_IB_CLUSTER_ID
 
 LimitMEMLOCK=infinity
 
