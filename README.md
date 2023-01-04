@@ -23,5 +23,5 @@ The installation will stop if your hardware does not suppport device isolation.
 
 **Installation**
 ``` 
-./install_golem_cuda.sh
+./configure.sh
 ``` 
