@@ -338,13 +338,13 @@ check_golem_version()
 check_golem()
 {
 	if [ $(check_golem_installed) -eq 0 ]; then
-		display_error "Golem not installed" "Please install Golem $GOLEM_CORE." 6 35
+		display_error "Golem not installed" "Please install Golem $GOLEM_CORE\n\ncurl -sSf https://join.golem.network/as-provider | bash -" 9 65
 	else
 		if [ $(check_golem_valid_vm) -eq 0 ]; then
-			display_error "Invalid Golem installation" "Please check your Golem installation." 7 45
+			display_error "Invalid Golem installation" "Please check your Golem installation\n\ngolemsp status\nhttps://handbook.golem.network/troubleshooting/provider-troubleshooting" 10 75
 		fi
 		if [ $(check_golem_version) -eq 0 ]; then
-			display_error "Invalid Golem version" "Please install Golem $GOLEM_CORE" 7 35
+			display_error "Invalid Golem version" "Please install Golem $GOLEM_CORE\n\ncurl -sSf https://join.golem.network/as-provider | bash -" 9 65
 		fi
 	fi
 }
@@ -397,6 +397,7 @@ reboot()
 
 #######################################################################################################################
 
+check_golem
 check_packages_required
 configure_iommu
 
@@ -406,8 +407,6 @@ clear
 if [ $ret -gt 0 ]; then
 	exit $ret
 else
-	check_golem
-
 	gpu_vfio=$(echo $gpu_selected | awk -F" " '{print $1}')
 	gpu_slot=$(echo $gpu_selected | awk -F" " '{print $2}')
 
@@ -418,3 +417,4 @@ else
 	install_service $gpu_slot
 	reboot "Installation finished, reboot needed to complete." 6 55
 fi
+
