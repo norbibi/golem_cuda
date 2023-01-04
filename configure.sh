@@ -385,7 +385,7 @@ display_error()
 display_bad_isolation()
 {
 	msg=$(list_pci_devices_in_iommu_group $1 "$2")
-	dialog --stdout --title "GPU bad isolation" --msgbox "\n$msg" 10 130
+	dialog --stdout --title "GPU bad isolation" --msgbox "\n$msg\n\nTry changing your GPU PCIe slot." 13 130
 }
 
 reboot()
