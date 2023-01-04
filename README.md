@@ -4,6 +4,8 @@ Golem Cuda is an overlay for Golem providers to enable GPU computing.
 
 This release has an automated instaler with a terminal menu for GPU selection to simplify setup.  
 
+Tested only on native machine with Ubuntu 22.04.
+
 **Security aspect**
 
 Distributed computing through a virtual machine requires device isolation, especially with a PCIe device like GPU.  
