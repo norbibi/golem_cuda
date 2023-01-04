@@ -1,6 +1,7 @@
 #!/bin/bash
 
 GOLEM_CORE=0.12.0
+dir=$(dirname "$(realpath "$0")")
 
 # Architecture ########################################################################################################
 
@@ -352,15 +353,15 @@ check_golem()
 
 install_overlay()
 {
-	cp -f ./ya-runtime-vm /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/ya-runtime-vm
-	cp -f ./vmlinuz-virt /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/runtime/vmlinuz-virt
-	cp -f ./vmrt /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/runtime/vmrt
-	cp -f ./vgabios-stdvga.bin /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/runtime/vgabios-stdvga.bin
+	cp -f $dir/binaries/ya-runtime-vm /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/ya-runtime-vm
+	cp -f $dir/binaries/vmlinuz-virt /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/runtime/vmlinuz-virt
+	cp -f $dir/binaries/vmrt /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/runtime/vmrt
+	cp -f $dir/adds/vgabios-stdvga.bin /home/$USER/.local/lib/yagna/plugins/ya-runtime-vm/runtime/vgabios-stdvga.bin
 }
 
 install_service()
 {
-	sudo cp -f ./golem_provider.service /etc/systemd/system/golem_provider.service
+	sudo cp -f $dir/adds/golem_provider.service /etc/systemd/system/golem_provider.service
 	sudo sed -i 's/SED_GPU_PCI/'$1'/' /etc/systemd/system/golem_provider.service
 	sudo sed -i 's/SED_USER/'$USER'/' /etc/systemd/system/golem_provider.service
 }
