@@ -2,7 +2,7 @@
 
 Golem Cuda is an overlay for Golem providers to enable GPU computing.
 
-This release has an automated instaler with a terminal menu for GPU selection to simplify setup.  
+This release has an automated installer with a terminal menu for GPU selection to simplify setup.  
 
 <p align="center">
 <img src="screenshots/gpu_selection.png" width="50%"> 
