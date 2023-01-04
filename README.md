@@ -1,4 +1,4 @@
-# Golem Cuda V3
+# Golem (0.12.0) Cuda  
 
 Golem Cuda is an overlay for Golem providers to enable GPU computing.
 
@@ -20,6 +20,23 @@ The installation will stop if your hardware does not suppport device isolation.
 **Requirements**
 - enable IOMMU & ACS in UEFI
 - install Golem provider v0.12.0
+
+**Build (optional)**
+- ya-runtime-vm
+``` 
+cd ya-runtime-vm
+cargo build --release
+``` 
+- vmrt
+``` 
+cd ya-runtime-vm/qemu
+make
+``` 
+- vmlinuz-virt
+``` 
+cd docker_golem_cuda_base
+make
+``` 
 
 **Installation**
 ``` 
