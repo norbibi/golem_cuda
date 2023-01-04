@@ -4,6 +4,10 @@ Golem Cuda is an overlay for Golem providers to enable GPU computing.
 
 This release has an automated instaler with a terminal menu for GPU selection to simplify setup.  
 
+<p align="center">
+<img src="screenshots/gpu_selection.png" width="50%"> 
+</p>
+
 Tested only on native machine with Ubuntu 22.04.
 
 **Security aspect**
@@ -19,6 +23,10 @@ Kernel ACS patch can be used to bypass IOMMU and assign one device per vitual IO
  ... please don't use it ... the shared device can access all host RAM, it's a big security hole.   
 
 The installation will stop if your hardware does not suppport device isolation. 
+
+<p align="center">
+<img src="screenshots/bad_isolation.png" width="80%"> 
+</p>
 
 **Requirements**
 - enable IOMMU & ACS in UEFI
@@ -45,4 +53,10 @@ make
 **Installation**
 ``` 
 ./configure.sh
+``` 
+
+**Start & check service golem_provider**
+``` 
+sudo systemctl enable --now golem_provider.service
+journalctl -e -u golem_provider.service
 ``` 
