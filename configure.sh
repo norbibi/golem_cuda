@@ -397,8 +397,8 @@ reboot()
 
 #######################################################################################################################
 
-check_golem
 check_packages_required
+check_golem
 configure_iommu
 
 gpu_selected=$(select_gpu_compatible)
