@@ -30,7 +30,7 @@ RUN cd /usr/src \
 	&& make install \
 	&& make modules_install \
 	&& cd /usr/src \
-	&& wget https://download.nvidia.com/XFree86/Linux-x86_64/510.60.02/NVIDIA-Linux-x86_64-510.60.02-no-compat32.run \
-	&& chmod +x NVIDIA-Linux-x86_64-510.60.02-no-compat32.run \
-	&& ./NVIDIA-Linux-x86_64-510.60.02-no-compat32.run -k 5.10.29 -s --kernel-source-path=/usr/src/linux-5.10.29 \
+	&& wget https://download.nvidia.com/XFree86/Linux-x86_64/525.85.05/NVIDIA-Linux-x86_64-525.85.05-no-compat32.run \
+	&& chmod +x NVIDIA-Linux-x86_64-525.85.05-no-compat32.run \
+	&& ./NVIDIA-Linux-x86_64-525.85.05-no-compat32.run -k 5.10.29 -s --kernel-source-path=/usr/src/linux-5.10.29 \
 	&& rm -rf /usr/src/*
