@@ -1,5 +1,5 @@
 [submodule "ya-runtime-vm"]
 	path = ya-runtime-vm
 	url = https://github.com/norbibi/ya-runtime-vm.git
-	branch = v0.3.0_golem_cuda
+	branch = master
 
