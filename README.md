@@ -31,7 +31,7 @@ The installation will stop if your hardware does not suppport device isolation.
 **Requirements**
 - enable IOMMU & ACS in UEFI
 - Golem provider v0.12.0
-- Docker, Rust (for build only)
+- Docker, Rust (for build only on machine without GPU, VM for example)
 
 **Build (optional)**
 - ya-runtime-vm
